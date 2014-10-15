@@ -1,0 +1,16 @@
+#!/bin/bash
+# Author: Paulo Jerônimo (email: paulojeronimo@gmail.com; twitter: @paulojeronimo)
+#
+# Script para configuração de um ambiente de desenvolvimento para a SisLegis
+# Pode ser utilizado no OS X (Darwin), no Linux, e no Cygwin.
+
+# retorna o caminho completo para o diretório que contém esse script
+_this_dir() { echo -n $(cd "$(dirname "$(caller | cut -d ' ' -f 2-)")"; pwd); }
+
+# .Ambiente
+export AMBIENTE_HOME=`_this_dir`
+INSTALA_OPCS="--baixa-arquivo"
+#INSTALA_OPCS="$INSTALA_OPCS --usa-curl"
+export_ambiente_default_dirs
+carregar_ambiente
+# .Ambiente.fim
