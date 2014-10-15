@@ -65,7 +65,8 @@ git config --global user.email "$GH_EMAIL"
 
 Baixe e instale este projeto da seguinte forma:
 ```bash
-git clone http://github.com/$GH_USER/sislegis-ambiente
+cd github.com/$GH_USER
+git clone http://!$/sislegis-ambiente
 cd && ln -s $OLDPWD/sislegis-ambiente SisLegis
 cd SisLegis && setenv "$PWD/ambiente"
 ```
