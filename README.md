@@ -3,18 +3,20 @@
 Scripts para montagem do ambiente de desenvolvimento do [SISLEGIS] em [Darwin] ([OS X]), Linux ([Fedora]/[Ubuntu]) e [Cygwin] (Windows).
 
 ## montagem do ambiente no Fedora
-Os passos a seguir demonstram a instalação do ambiente num Fedora 20. Nesse documento é utilizada a [vm-fedora](http://gdriv.es/vm-fedora), uma máquina virtual (VM) Fedora configurada por [Paulo Jerônimo] conforme os passos descritos em http://github.com/paulojeronimo/vms/. Essa VM contém, em sua instalação, apenas os pacotes básicos do Fedora. Obviamente, os passos de montagem desse ambiente podem ser replicados em qualquer outra máquina com um Fedora instalado nessa mesma versão. Se você estiver utilizando tua própria máquina para executar os passos a seguir, a recomendação é que você, em primeiro lugar, crie um novo usuário para seguir os passos apresentados. Do contrário, você pode utilizar o usuário da própria VM. Fazemos esta recomendação pelo fato de que vários arquivos localizados no `$HOME` do usuário serão configurados nos próximos passos.
+Os passos a seguir demonstram a instalação do ambiente num Fedora 20. Para seguir estes passos, você pode utilizar tua máquina (se já tiver essa versão do Fedora instalada) ou uma máquina virtual (VM) chamada [vm-fedora](http://gdriv.es/vm-fedora). Essa VM foi configurada por [Paulo Jerônimo] conforme os passos que ele descreve em http://github.com/paulojeronimo/vms/. Ela contém, em sua instalação, apenas os pacotes básicos do Fedora.
 
-Teu primeiro passo, antes de começar a configurar tua máquina (ou a `vm-fedora`), é fazer um fork deste projeto e do projeto [sislegis-dotfiles] para a tua conta no GitHub. O motivo disso é simples: tanto este projeto quando o sislegis-dotfiles serão coisas que você evoluirá continuamente. E, para salvar tuas alterações, você desejará fazer um push delas para o teu fork e, às vezes, fazer um `pull request` de tuas mudanças.
+Se você estiver utilizando tua própria máquina para executar os procedimentos que apresentaremos, nossa recomendação é que você, em primeiro lugar, crie um novo usuário para seguir estes esses passos. Fazemos esta recomendação pelo fato de que vários arquivos localizados no `$HOME` do usuário serão configurados e isso poderá conflitar com tuas próprias configurações. Se você estiver utilizando a `vm-fedora` você poderá utilizar simplesmente utilizar teu usuário padrão (`aluno`).
+
+Antes de começar a configurar tua máquina (ou a `vm-fedora`), é necessário fazer um fork deste projeto e do projeto [sislegis-dotfiles] para a tua conta no GitHub. O motivo disso é simples: tanto este projeto quando o sislegis-dotfiles serão coisas que você evoluirá continuamente. E, para salvar tuas alterações, você desejará fazer um push delas para o teu fork. Às vezes, desejará, também, fazer um `pull request` de tuas mudanças.
 
 ### utilizando a tua própria máquina
-Se você está utilizando tua própria máquina, crie o usuário `sislegis` em teu ambiente e libere-o para executar comandos gráficos utilizando o teu usuário. Para isso, execute os seguintes comandos:
+Se você está utilizando tua própria máquina, crie o usuário `sislegis` em teu ambiente e libere-o para executar comandos gráficos utilizando o teu usuário. Para isso, execute:
 ```bash
 sudo useradd -m -s /bin/bash -G wheel sislegis
 xhost +si:localuser:sislegis
 echo "!!" >> ~/.bashrc
 ```
-Em seguida, logue-se com esse usuário e configure seu `DISPLAY`:
+Em seguida, logue-se com esse usuário e configure o seu `DISPLAY`:
 ```bash
 sudo su - sislegis
 export DISPLAY=:0
@@ -30,7 +32,7 @@ Se você está utilizando a `vm-fedora`, logue-se nela com o usuário `aluno` e 
 ssh -f -N -R 2222:localhost:22 pj@base
 ```
 
-Em seguida, a partir do teu HOST execute:
+Em seguida, a partir do teu HOST, execute:
 ```bash
 ssh -p 2222 aluno@localhost
 ```
