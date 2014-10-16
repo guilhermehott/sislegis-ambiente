@@ -5,15 +5,27 @@ Scripts para montagem do ambiente de desenvolvimento do [SISLEGIS] em [Darwin] (
 ## montagem do ambiente no Fedora
 Os passos a seguir demonstram a instalação do ambiente num Fedora 20. Nesse documento é utilizada a [vm-fedora](http://gdriv.es/vm-fedora), uma máquina virtual (VM) Fedora configurada por [Paulo Jerônimo] conforme os passos descritos em http://github.com/paulojeronimo/vms/. Essa VM contém, em sua instalação, apenas os pacotes básicos do Fedora. Obviamente, os passos de montagem desse ambiente podem ser replicados em qualquer outra máquina com um Fedora instalado nessa mesma versão. Se você estiver utilizando tua própria máquina para executar os passos a seguir, a recomendação é que você, em primeiro lugar, crie um novo usuário para seguir os passos apresentados. Do contrário, você pode utilizar o usuário da própria VM. Fazemos esta recomendação pelo fato de que vários arquivos localizados no `$HOME` do usuário serão configurados nos próximos passos.
 
-Teu primeiro passo, antes de começar a configurar tua máquina (ou a vm-fedora), é fazer um fork deste projeto e do projeto [sislegis-dotfiles] para a tua conta no GitHub. O motivo disso é simples: tanto este projeto quando o sislegis-dotfiles serão coisas que você evoluirá continuamente. E, para salvar tuas alterações, você desejará fazer um push delas para o teu fork e, às vezes, fazer um `pull request` de tuas mudanças.
+Teu primeiro passo, antes de começar a configurar tua máquina (ou a `vm-fedora`), é fazer um fork deste projeto e do projeto [sislegis-dotfiles] para a tua conta no GitHub. O motivo disso é simples: tanto este projeto quando o sislegis-dotfiles serão coisas que você evoluirá continuamente. E, para salvar tuas alterações, você desejará fazer um push delas para o teu fork e, às vezes, fazer um `pull request` de tuas mudanças.
 
-Seguindo em frente, se você está utilizando a vm-fedora, logue-se nela com o usuário `aluno` e a senha `@lun0123`. Se você está utilizando tua própria máquina, para criar um novo usuário em teu ambiente, denominado `sislegis`, execute os seguintes comandos para criar e se tornar esse usuário:
+### utilizando a tua própria máquina
+Se você está utilizando tua própria máquina, crie o usuário `sislegis` em teu ambiente e libere-o para executar comandos gráficos utilizando o teu usuário. Para isso, execute os seguintes comandos:
 ```bash
 sudo useradd -m -s /bin/bash -G wheel sislegis
+xhost +si:localuser:sislegis
+echo "!!" >> ~/.bashrc
+```
+Em seguida, logue-se com esse usuário e configure seu `DISPLAY`:
+```bash
 sudo su - sislegis
+export DISPLAY=:0
+echo "!!" >> ~/.bashrc
 ```
 
-Se estiver utilizando a vm-fedora e quiser fazer um túnel reverso para acessar sua console a partir de teu HOST, execute o comando a seguir (_substituindo `pj` pelo nome de teu nome de usuário em tua máquina_):
+Isso possiblitará que o usuário `sislegis`, mais a frente, execute o [JBoss Developer Studio] acessando o ambiente gráfico executado pelo teu próprio usuário.
+### utilizando a vm-fedora
+Se você está utilizando a `vm-fedora`, logue-se nela com o usuário `aluno` e a senha `@lun0123`.
+
+É interessante que você faça um túnel reverso para acessar a console da VM a partir de teu HOST pois isso te possilitará copiar e colar os comando deste passo a passo diretamente para o shell aberto na VM (_isso não é possível de ser feito na console aberta pelo VirtualBox_). Para isso, execute o comando a seguir (_substituindo `pj` pelo nome de teu nome de usuário em tua máquina_):
 ```bash
 ssh -f -N -R 2222:localhost:22 pj@base
 ```
@@ -23,6 +35,7 @@ Em seguida, a partir do teu HOST execute:
 ssh -p 2222 aluno@localhost
 ```
 
+### passos comuns (tanto na tua própria máquina quanto na vm-fedora)
 Execute a instalação dos pacotes necessários para o download e a execução dos scripts do ambiente:
 ```bash
 sudo yum -y install git tar unzip wget
@@ -63,6 +76,8 @@ git config --global user.name "$GH_NAME"
 git config --global user.email "$GH_EMAIL"
 ```
 
+Verifique se elas estão certas (`git config -l`). Se necessário, repita os comandos anteriores.
+
 Baixe e instale este projeto da seguinte forma:
 ```bash
 cd github.com/$GH_USER
@@ -76,7 +91,7 @@ Finalmente, mande recarregar o teu ambiente com o comando a seguir:
 source ~/.`hostname -s`
 ```
 
-Esse arquivo (que tem o nome do host da tua máquina e está localizado no teu diretório $HOME) também será carregado automaticamente (pelo `~/.bashrc`) toda vez que você fizer o login no usuário `sislegis`.
+Esse arquivo (que tem o nome do host da tua máquina e está localizado no teu diretório `$HOME`) também será carregado automaticamente (pelo `~/.bashrc`) toda vez que você fizer o login no usuário `sislegis`.
 
 ### instalação do Fedy
 O [Fedy] é um software livre que apresenta um conjunto de scripts bash para facilitar a instalação de softwares proprietários no Fedora, como é o caso do [Oracle JDK].
@@ -118,7 +133,7 @@ jboss_instalar
 TODO
 
 ## montagem do ambiente no Cygwin
-TODO - (_talvez eu (PJ) nunca escreva isso_)
+TODO
 
 ## todo
 * Estes scripts ainda precisam de adaptações para que possam funcionar nos seguintes sistemas:
@@ -141,6 +156,7 @@ TODO - (_talvez eu (PJ) nunca escreva isso_)
 [Gradle]:http://www.gradle.org/
 [JBoss Forge]:http://forge.jboss.org/
 [WildFly]:http://wildfly.org/
+[JBoss Developer Studio]:http://www.jboss.org/products/devstudio/overview/
 
 <!---
 vim: set syntax=markdown:
