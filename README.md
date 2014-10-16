@@ -65,12 +65,18 @@ git config --global user.email "$GH_EMAIL"
 
 Baixe e instale este projeto da seguinte forma:
 ```bash
-git clone http://github.com/$GH_USER/sislegis-ambiente
+cd github.com/$GH_USER
+git clone http://!$/sislegis-ambiente
 cd && ln -s $OLDPWD/sislegis-ambiente SisLegis
 cd SisLegis && setenv "$PWD/ambiente"
 ```
 
-Faça o logout e o logon novamente.
+Finalmente, mande recarregar o teu ambiente com o comando a seguir:
+```bash
+source ~/.`hostname -s`
+```
+
+Esse arquivo (que tem o nome do host da tua máquina e está localizado no teu diretório $HOME) também será carregado automaticamente (pelo `~/.bashrc`) toda vez que você fizer o login no usuário `sislegis`.
 
 ### instalação do Fedy
 O [Fedy] é um software livre que apresenta um conjunto de scripts bash para facilitar a instalação de softwares proprietários no Fedora, como é o caso do [Oracle JDK].
