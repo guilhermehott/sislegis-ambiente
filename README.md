@@ -14,13 +14,13 @@ Se você está utilizando tua própria máquina, crie o usuário `sislegis` em t
 ```bash
 sudo useradd -m -s /bin/bash -G wheel sislegis
 xhost +si:localuser:sislegis
-echo "!!" >> ~/.bashrc
+f=~/.bashrc; grep -q 'xhost.*sislegis' $f || echo "!!" >> $f
 ```
 Em seguida, logue-se com esse usuário e configure o seu `DISPLAY`:
 ```bash
 sudo su - sislegis
 export DISPLAY=:0
-echo "!!" >> ~/.bashrc
+f=~/.bashrc; grep -q 'xhost.*sislegis' $f || echo "!!" >> $f
 ```
 
 Isso possiblitará que o usuário `sislegis`, mais a frente, execute o [JBoss Developer Studio] acessando o ambiente gráfico executado pelo teu próprio usuário.
@@ -69,7 +69,7 @@ git clone http://!$/sislegis-dotfiles
 ./sislegis-dotfiles/install
 ```
 
-*Faça o logout e o logon novamente*. Observe que, ao refazer o logon, vários arquivos terão sido adicionados no diretório `$HOME` do usuário.
+**Faça o logout e o logon novamente**. Observe que, ao refazer o logon, vários arquivos terão sido adicionados no diretório `$HOME` do usuário.
 
 Ajuste as configurações do Git executando os comandos a seguir:
 ```bash
@@ -133,6 +133,9 @@ jbdevstudio_instalar
 ```
 
 ## montagem do ambiente no Darwin
+TODO
+
+## montagem do ambiente no Ubuntu
 TODO
 
 ## montagem do ambiente no Cygwin
