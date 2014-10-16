@@ -127,7 +127,7 @@ Observe a saída do comando acima e note que, após sua execução, o Maven est�
 Façamos também a instalação do [Gradle], do [JBoss Forge] e do [WildFly] executando os seguintes comandos:
 ```bash
 gradle_instalar
-#forge_instalar
+forge_instalar
 jboss_instalar
 ```
 
