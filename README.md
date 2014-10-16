@@ -110,7 +110,7 @@ sudo fedy -e oracle_jdk
 java -version
 ```
 
-### instalação das ferramentas Maven, Gradle, JBoss Forge e WildFly
+### instalação das ferramentas Maven, Gradle, JBoss Forge, WildFly e JBoss Developer Studio
 Para tornar a instalação do ambiente de desenvolvimento homogênea entre diferentes plataformas é que existe esse projeto que você baixou e está utilizando.
 
 Sua idéia básica é que, nas instalações das ferramentas, sejam utilizados o script `~/.scripts/instalar` (instalado pelo projeto [sislegis-dotfiles]) e as configurações realizadas em `~/SisLegis/configuracoes`. Também são utilizadas funções específicas ao ambiente e essas estão no diretório `~/SisLegis/funcoes`. 
@@ -124,11 +124,12 @@ maven_instalar
 
 Observe a saída do comando acima e note que, após sua execução, o Maven está instalado e disponível no diretório `~/SisLegis/ferramentas/`.
 
-Façamos também a instalação do [Gradle], do [JBoss Forge] e do [WildFly] executando os seguintes comandos:
+Façamos também a instalação do [Gradle], do [JBoss Forge], do [WildFly] e do [JBoss Deveoper Studio] executando os seguintes comandos:
 ```bash
 gradle_instalar
 forge_instalar
 jboss_instalar
+jbdevstudio_instalar
 ```
 
 ## montagem do ambiente no Darwin
