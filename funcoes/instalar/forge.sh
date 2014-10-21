@@ -1,6 +1,7 @@
 instala_forge() {
   instala_aplicacao
-  forge_instalar_addons
+  # comentado enquanto não há possibilidade de instalação automática
+  # forge_instalar_addons
 }
 
 remove_forge() {
