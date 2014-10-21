@@ -1,11 +1,6 @@
 instala_forge() {
   instala_aplicacao
-
-  echo -e "\nInstalando o addon para o Gradle ..."
-  forge -i org.jboss.forge.addon:gradle
-
-  echo -e "\nInstalando o addon para o AgularJS ..."
-  forge -i org.jboss.forge.addon:angularjs
+  forge_instalar_addons
 }
 
 remove_forge() {
