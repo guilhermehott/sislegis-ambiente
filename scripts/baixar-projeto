@@ -1,0 +1,24 @@
+#!/bin/bash
+# Author: Paulo Jeronimo (email: paulojeronimo@gmail.com; twitter: @paulojeronimo)
+
+BASEDIR=`cd "$(dirname "$0")/.."; pwd`
+
+cd "$BASEDIR"
+mkdir -p projetos && cd projetos
+recriar-links
+
+SCRIPT=`basename "$0"`
+case "$SCRIPT" in
+    baixar-*)
+        PROJETO=`echo -n ${SCRIPT#baixar-}`;;
+esac
+if [ "$PROJETO" = "projeto" ]
+then
+    PROJETO=$1; [ "$PROJETO" ] || { echo "Projeto não informado!"; exit 1; }
+fi
+rm -rf $PROJETO
+
+source ~/.github
+git clone http://github.com/$GITHUB_USER/sislegis-$PROJETO $PROJETO
+
+# vim: set ts=4 sw=4 expandtab:
