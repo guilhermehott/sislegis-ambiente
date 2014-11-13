@@ -12,5 +12,6 @@ export AMBIENTE_HOME=`_this_dir`
 INSTALA_OPCS="${INSTALA_OPCS:---baixa-arquivo}"
 #INSTALA_OPCS="$INSTALA_OPCS --usa-curl"
 export_ambiente_default_dirs
+export PROJETOS_DIR=$AMBIENTE_HOME/../projetos
 carregar_ambiente
 # .Ambiente.fim

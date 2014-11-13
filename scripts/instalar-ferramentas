@@ -2,7 +2,7 @@
 
 source ~/.`hostname -s`
 maven_instalar
-gradle_instalar
+#gradle_instalar
 forge_instalar
 jboss_instalar
 [ "$DISPLAY" ] && eclipse_instalar
