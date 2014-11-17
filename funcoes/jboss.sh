@@ -10,9 +10,10 @@ JBOSS_DEPLOYMENTS=$JBOSS_BASE/deployments
 # funções de instalação e remoção:
 jboss_instalar() { instalar jboss "$@"; }
 jboss_remover() { remover jboss "$@"; }
-# funções de inicialização/parada: 
-jboss_start() { standalone.sh; }
-jboss_stop() { jboss-cli.sh -c :shutdown; }
+# funções de inicialização/parada/status: 
+jboss_start() { sudo systemctl start jboss; }
+jboss_stop() { sudo systemctl stop jboss; }
+jboss_status() { sudo systemctl status jboss; }
 # funções de manipulação de logs:
 jboss_logs() { ls -lht "$JBOSS_LOG"/*.log; }
 jboss_rmlogs() { rm -f "$JBOSS_LOG"/*.log; }
