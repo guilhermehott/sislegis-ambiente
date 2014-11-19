@@ -11,6 +11,7 @@ app_merge_upstream_master() { app && git merge upstream/master; }
 app_pull() { app && git pull; }
 app_clean() { app && mvn clean; }
 app_clean_package() { app && mvn clean package -DskipTests=true "$@"; }
+app_package() { app && mvn package -DskipTests=true "$@"; }
 app_deploy() {
     app
     package=target/sislegis.war
@@ -26,6 +27,10 @@ app_deploy() {
     else
         echo "\"$package\" não encontrado!"
     fi
+}
+app_package_and_deploy() {
+    app_package
+    app_deploy
 }
 app_update_and_deploy() {
     app_fetch_upstream
