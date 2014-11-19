@@ -1,4 +1,5 @@
 instala_jboss() {
+   local file2patch
    instala_aplicacao
 
    echo "Criando o arquivo /etc/default/wildfly.conf ..."
@@ -10,11 +11,16 @@ JBOSS_MODE=standalone
 JBOSS_PARAMS="-b 0.0.0.0"
 EOF
 
-   echo "Criando o arquivo /etc/init.d/jboss ..."
-   sudo cp $JBOSS_HOME/bin/init.d/wildfly-init-redhat.sh /etc/init.d/jboss
-   sudo patch /etc/init.d/jboss < "$FUNCOES_DIR"/instalar/jboss.patch
+   file2patch=etc/init.d/jboss
+   echo "Criando o arquivo /$file2patch"
+   sudo cp $JBOSS_HOME/bin/init.d/wildfly-init-redhat.sh /$file2patch
+   sudo patch /$file2patch < "$FUNCOES_DIR"/instalar/patches/ROOT/$file2patch > /dev/null
 
-   echo "Configurando inicialização automática ..."
+   file2patch=standalone/configuration/standalone.xml
+   echo "Configurando o arquivo $JBOSS_HOME/$file2patch"
+   patch $JBOSS_HOME/$file2patch < "$FUNCOES_DIR"/instalar/patches/JBOSS_HOME/$file2patch > /dev/null
+
+   echo "Configurando a inicialização automática no boot"
    sudo chkconfig jboss on
 }
 
@@ -25,8 +31,11 @@ remove_jboss() {
 "
    for f in $jboss_files
    do
-      echo "Removendo o arquivo \"$f\""
-      sudo rm -f $f
+      if [ -f "$f" ]
+      then
+         echo "Removendo o arquivo \"$f\""
+         sudo rm -f $f
+      fi
    done
 
    remove_aplicacao
