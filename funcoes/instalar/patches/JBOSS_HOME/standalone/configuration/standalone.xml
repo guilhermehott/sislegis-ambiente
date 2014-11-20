@@ -1,0 +1,25 @@
+--- standalone.xml	2014-05-30 19:54:30.000000000 -0700
++++ /home/vagrant/standalone.xml	2014-11-19 10:15:06.378061964 -0800
+@@ -326,6 +326,7 @@
+                 <http-listener name="default" socket-binding="http"/>
+                 <host name="default-host" alias="localhost">
+                     <location name="/" handler="welcome-content"/>
++                    <location name="/sislegis/static" handler="sislegis-static"/>
+                     <filter-ref name="server-header"/>
+                     <filter-ref name="x-powered-by-header"/>
+                 </host>
+@@ -335,6 +336,7 @@
+             </servlet-container>
+             <handlers>
+                 <file name="welcome-content" path="${jboss.home.dir}/welcome-content"/>
++                <file name="sislegis-static" path="/home/vagrant/projetos/app/src/main/webapp/static"/>
+             </handlers>
+             <filters>
+                 <response-header name="server-header" header-name="Server" header-value="WildFly/8"/>
+@@ -381,4 +383,4 @@
+             <remote-destination host="localhost" port="25"/>
+         </outbound-socket-binding>
+     </socket-binding-group>
+-</server>
+\ No newline at end of file
++</server>
