@@ -14,18 +14,24 @@ app_clean_package() { app && mvn clean package -DskipTests=true "$@"; }
 app_package() { app && mvn package -DskipTests=true "$@"; }
 app_deploy() {
     app
-    package=target/sislegis.war
+    local package=target/sislegis.war
     if [ -f $package ]
     then
-        deploy_dir="$JBOSS_HOME"/standalone/deployments
-        if [ -d "$deploy_dir" ]
-        then
-            cp $package "$deploy_dir"/
-        else
-            echo "\"$deploy_dir\" não encontrado!"
-        fi
+        echo -n "Copiando \"$package\" para \"$JBOSS_DEPLOYMENTS\" ... "
+        cp $package "$JBOSS_DEPLOYMENTS"/ && ok || falha
     else
         echo "\"$package\" não encontrado!"
+    fi
+}
+app_undeploy() {
+    app
+    local package=$JBOSS_DEPLOYMENTS/sislegis.war
+    if [ -f "$package" ]
+    then
+        echo -n "Removendo \"$package\" ... "
+        rm -f "$package" && ok || falha
+    else
+        echo "\"`basename \"$package\"`\" não está implantado em \"$JBOSS_DEPLOYMENTS!\""
     fi
 }
 app_package_and_deploy() {
