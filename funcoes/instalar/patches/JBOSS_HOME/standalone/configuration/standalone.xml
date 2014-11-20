@@ -4,7 +4,7 @@
                  <http-listener name="default" socket-binding="http"/>
                  <host name="default-host" alias="localhost">
                      <location name="/" handler="welcome-content"/>
-+                    <location name="/sislegis-html" handler="sislegis-content"/>
++                    <location name="/sislegis/static" handler="sislegis-static"/>
                      <filter-ref name="server-header"/>
                      <filter-ref name="x-powered-by-header"/>
                  </host>
@@ -12,7 +12,7 @@
              </servlet-container>
              <handlers>
                  <file name="welcome-content" path="${jboss.home.dir}/welcome-content"/>
-+                <file name="sislegis-content" path="/home/vagrant/projetos/app/src/main/webapp"/>
++                <file name="sislegis-static" path="/home/vagrant/projetos/app/src/main/webapp/static"/>
              </handlers>
              <filters>
                  <response-header name="server-header" header-name="Server" header-value="WildFly/8"/>
