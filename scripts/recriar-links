@@ -1,0 +1,18 @@
+#!/bin/bash
+# Author: Paulo Jeronimo (email: paulojeronimo@gmail.com; twitter: @paulojeronimo)
+
+BASEDIR=`cd "$(dirname "$0")/.."; pwd`
+
+cd "$BASEDIR"
+for f in `find . -maxdepth 1 ! \( \
+    -name '.' -o \
+    -name '.git' -o \
+    -name '.gitignore' -o \
+    -name 'instalar' -o \
+    -name '.m2' -o \
+    -name 'README.md' -o \
+    -name 'remover' \
+    \)`
+do
+    (cd && ln -sf "${BASEDIR##$HOME/}"/${f##\./})
+done

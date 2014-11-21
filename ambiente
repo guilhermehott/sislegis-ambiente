@@ -9,8 +9,6 @@ _this_dir() { echo -n $(cd "$(dirname "$(caller | cut -d ' ' -f 2-)")"; pwd); }
 
 # .Ambiente
 export AMBIENTE_HOME=`_this_dir`
-INSTALA_OPCS="--baixa-arquivo"
-#INSTALA_OPCS="$INSTALA_OPCS --usa-curl"
-export_ambiente_default_dirs
+configurar_ambiente
 carregar_ambiente
 # .Ambiente.fim

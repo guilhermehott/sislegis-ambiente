@@ -1,0 +1,9 @@
+#!/bin/bash
+# Author: Paulo Jeronimo (email: paulojeronimo@gmail.com; twitter: @paulojeronimo)
+
+BASEDIR=`cd "$(dirname "$0")"; pwd`
+
+source ~/.funcoes/diversas.sh && setenv "$BASEDIR/ambiente"
+
+"$BASEDIR/scripts/instalar-ferramentas"
+"$BASEDIR/scripts/recriar-links"

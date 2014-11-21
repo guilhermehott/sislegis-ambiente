@@ -1,0 +1,23 @@
+#!/bin/bash
+# Author: Paulo Jeronimo (email: paulojeronimo@gmail.com; twitter: @paulojeronimo)
+set +x
+
+mkdir -p "$PROJETOS_DIR"
+cd "$PROJETOS_DIR"
+
+SCRIPT=`basename "$0"`
+case "$SCRIPT" in
+    baixar-*)
+        PROJETO=`echo -n ${SCRIPT#baixar-}`;;
+esac
+if [ "$PROJETO" = "projeto" ]
+then
+    PROJETO=$1; [ "$PROJETO" ] || { echo "Projeto não informado!"; exit 1; }
+fi
+rm -rf $PROJETO
+
+source ~/.github
+REPO=GITHUB_SISLEGIS_${PROJETO^^}
+git clone ${!REPO} $PROJETO
+
+# vim: set ts=4 sw=4 expandtab:
